@@ -1,66 +1,1053 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heep Woh TV | 广州协和学校电视台</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: "SimHei", "Heiti SC", "Microsoft YaHei", sans-serif;
-      font-weight: bold;
-      background: #ffffff;
-      color: #111111;
-      text-align: center;
-      padding: 24px;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>协和电视台 | Heep Woh TV</title>
 
-    h1 {
-      font-size: 2.2rem;
-      margin: 0 0 12px;
-      letter-spacing: 1px;
-      color: #c81b21;
-    }
+<style>
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('HarmonyOS_Sans_Regular.woff2') format('woff2'),
+       url('HarmonyOS_Sans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('HarmonyOS_Sans_Black.woff2') format('woff2'),
+       url('HarmonyOS_Sans_Black.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans SC';
+  src: url('HarmonyOS_Sans_SC_Regular.woff2') format('woff2'),
+       url('HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans SC';
+  src: url('HarmonyOS_Sans_SC_Black.woff2') format('woff2'),
+       url('HarmonyOS_Sans_SC_Black.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
-    h2 {
-      font-size: 1.6rem;
-      margin: 0 0 40px;
-      font-weight: bold;
-      color: #c81b21;
-    }
+:root {
+  --primary-red: #c81b21;
+  --bilibili-pink: #fb7299;
+  --bg-body: #f4f6f8;
+  --bg-card: #ffffff;
+  --bg-nav: #ffffff;
+  --text-dark: #222222;
+  --text-gray: #666666;
+  --text-light-gray: #999999;
+  --border-light: #f0e0e0;
+  --email-bg: #fff8f9;
+  --nav-hover: #f5f5f5;
+  --nav-active-bg: #ffe8e9;
+  --shadow: rgba(0,0,0,0.06);
+  --shadow-hover: rgba(0,0,0,0.1);
+}
 
-    a {
-      font-size: 1.2rem;
-      color: #fb7299;
-      text-decoration: underline;
-    }
+body.dark-mode {
+  --bg-body: #1a1a1a;
+  --bg-card: #2a2a2a;
+  --bg-nav: #222222;
+  --text-dark: #e8e8e8;
+  --text-gray: #b0b0b0;
+  --text-light-gray: #888888;
+  --border-light: #3a3a3a;
+  --email-bg: #2a2222;
+  --nav-hover: #333333;
+  --nav-active-bg: #3a1a1a;
+  --shadow: rgba(0,0,0,0.3);
+  --shadow-hover: rgba(0,0,0,0.5);
+}
 
-    a:hover {
-      color: #fb7299;
-      text-decoration: none;
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 1.6rem; }
-      h2 { font-size: 1.2rem; }
-      a  { font-size: 1rem; }
-    }
-  </style>
+body {
+  font-family: 'HarmonyOS Sans', 'HarmonyOS Sans SC', 'SimHei', 'Microsoft YaHei', sans-serif;
+  font-weight: bold;
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ==================== 首屏 ==================== */
+#landing-page {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #c81b21 0%, #7a0d12 100%);
+  color: #ffffff;
+  z-index: 999;
+  transition: opacity 0.5s ease, visibility 0.5s;
+  text-align: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+#landing-page.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.landing-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.logo-group { display: flex; justify-content: center; margin-bottom: 30px; }
+.logo-group img {
+  height: clamp(70px, 12vw, 110px);
+  width: auto;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,0.4));
+}
+
+#landing-page h1 {
+  font-size: clamp(2rem, 7vw, 3.8rem);
+  letter-spacing: clamp(2px, 1vw, 6px);
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+  line-height: 1.2;
+}
+
+#landing-page .subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  opacity: 0.9;
+  margin-bottom: clamp(28px, 5vw, 45px);
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+#landing-page .slogan {
+  font-size: clamp(1rem, 2.8vw, 1.5rem);
+  opacity: 0.95;
+  margin-bottom: clamp(28px, 5vw, 45px);
+  letter-spacing: clamp(1px, 0.5vw, 3px);
+  padding: 0 10px;
+}
+
+.enter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 18px);
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.enter-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+  padding: clamp(10px, 1.5vw, 13px) clamp(20px, 4vw, 36px);
+  border-radius: 30px;
+  font-size: clamp(0.92rem, 2vw, 1.1rem);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.enter-btn:hover {
+  background: #ffffff;
+  color: var(--primary-red);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.bili-landing-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  padding: clamp(8px, 1.2vw, 10px) clamp(18px, 3vw, 28px);
+  border-radius: 30px;
+  font-size: clamp(0.88rem, 1.8vw, 1rem);
+  text-decoration: none;
+  transition: all 0.3s;
+  margin-bottom: clamp(28px, 5vw, 45px);
+  text-align: center;
+}
+
+.bili-landing-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.bili-landing-btn .bili-icon { font-size: 1.2rem; }
+
+.landing-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.landing-years {
+  font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+  opacity: 0.7;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+
+.landing-friend-link {
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+  opacity: 0.75;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.6;
+}
+.landing-friend-link a {
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  transition: opacity 0.2s;
+}
+.landing-friend-link a:hover { opacity: 1; border-bottom-color: #ffffff; }
+
+.landing-made-by {
+  font-size: clamp(0.7rem, 1.4vw, 0.8rem);
+  opacity: 0.6;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+}
+.landing-made-by a {
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  transition: opacity 0.2s;
+}
+.landing-made-by a:hover { opacity: 1; border-bottom-color: #ffffff; }
+
+/* ==================== 主内容区 ==================== */
+#main-content { display: none; min-height: 100vh; padding-top: 70px; }
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  min-height: 70px;
+  background-color: var(--bg-nav);
+  box-shadow: 0 2px 15px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  z-index: 100;
+  transition: background-color 0.3s;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.nav-logo:hover { opacity: 0.75; }
+.nav-logo img { height: 42px; width: auto; }
+.nav-logo span { color: var(--primary-red); font-size: 1.2rem; letter-spacing: 1px; white-space: nowrap; }
+
+.nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-links { display: flex; gap: 8px; }
+
+.nav-links button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 18px;
+  cursor: pointer;
+  color: var(--text-dark);
+  border-radius: 8px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links button:hover { background-color: var(--nav-hover); color: var(--primary-red); }
+.nav-links button.active { color: var(--primary-red); background-color: var(--nav-active-bg); }
+.nav-links .home-btn { color: var(--primary-red); }
+
+.toggle-btn {
+  background: none;
+  border: 2px solid var(--border-light);
+  border-radius: 8px;
+  width: 44px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: bold;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.toggle-btn:hover { border-color: var(--primary-red); color: var(--primary-red); }
+
+.page-section {
+  display: none;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 50px 25px 0;
+  animation: fadeIn 0.5s ease;
+}
+.page-section.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--primary-red);
+  border-left: 6px solid var(--primary-red);
+  padding-left: 18px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.sub-title {
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  color: var(--primary-red);
+  margin: 40px 0 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.section-desc {
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  color: var(--text-gray);
+  margin-bottom: 16px;
+  font-weight: 400;
+  line-height: 1.9;
+  word-break: break-word;
+}
+
+/* ==================== 平台矩阵 ==================== */
+.platform-row { display: flex; flex-wrap: wrap; gap: 20px; margin: 25px 0 10px; }
+
+.platform-item {
+  flex: 1 1 240px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 18px 24px;
+  box-shadow: 0 4px 15px var(--shadow);
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  border-left: 5px solid var(--primary-red);
+  min-width: 0;
+}
+
+a.platform-item { cursor: pointer; position: relative; }
+
+a.platform-item::after {
+  content: "点击访问 →";
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 0.72rem;
+  color: var(--primary-red);
+  opacity: 0.7;
+  font-weight: 400;
+  transition: opacity 0.2s;
+}
+
+a.platform-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px var(--shadow-hover);
+  border-left-color: var(--bilibili-pink);
+}
+a.platform-item:hover::after { opacity: 1; }
+
+.platform-item.no-link { cursor: default; border-left-color: var(--text-light-gray); }
+
+.platform-icon { font-size: 1.8rem; flex-shrink: 0; }
+.platform-info { display: flex; flex-direction: column; min-width: 0; }
+.platform-info .p-name { font-size: 1.05rem; color: var(--text-dark); }
+.platform-info .p-account {
+  font-size: 0.9rem;
+  color: var(--text-light-gray);
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==================== 数据卡片 ==================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  padding: 28px 20px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 18px var(--shadow);
+  border-top: 4px solid var(--primary-red);
+  transition: transform 0.2s;
+}
+.stat-card:hover { transform: translateY(-3px); }
+
+.stat-card h3 {
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  color: var(--primary-red);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  word-break: break-word;
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: clamp(0.85rem, 1.6vw, 0.95rem);
+  color: var(--text-gray);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.stat-card .stat-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--primary-red);
+  text-decoration: none;
+  font-weight: 400;
+}
+.stat-card .stat-link:hover { text-decoration: underline; }
+
+/* ==================== 图片网格 ==================== */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 18px;
+  margin: 25px 0;
+}
+
+.image-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--shadow);
+  text-align: center;
+}
+
+.image-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+  background: #eaeaea;
+}
+
+.image-card p {
+  padding: 14px;
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+}
+
+/* ==================== 学生作品 ==================== */
+.work-block {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 30px);
+  margin-bottom: 30px;
+  box-shadow: 0 4px 18px var(--shadow);
+}
+
+.work-title {
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  color: var(--primary-red);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.work-desc {
+  font-size: clamp(0.9rem, 1.7vw, 1rem);
+  color: var(--text-gray);
+  font-weight: 400;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.bili-btn {
+  display: inline-block;
+  background-color: var(--bilibili-pink);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 11px 28px;
+  border-radius: 25px;
+  font-size: clamp(0.9rem, 1.7vw, 1rem);
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(251, 114, 153, 0.3);
+  margin-top: 5px;
+  text-align: center;
+}
+.bili-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(251, 114, 153, 0.45); }
+
+/* ==================== 加入我们 ==================== */
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.job-card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 28px) clamp(18px, 2.5vw, 24px);
+  box-shadow: 0 4px 18px var(--shadow);
+  border-top: 4px solid var(--primary-red);
+  transition: transform 0.2s;
+}
+.job-card:hover { transform: translateY(-3px); }
+
+.job-card h4 {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--primary-red);
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+.job-card .job-duty {
+  font-size: clamp(0.88rem, 1.6vw, 0.95rem);
+  color: var(--text-gray);
+  font-weight: 400;
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+
+.job-card .job-req {
+  font-size: clamp(0.82rem, 1.5vw, 0.9rem);
+  color: var(--text-gray);
+  font-weight: 400;
+  line-height: 1.8;
+  padding-left: 18px;
+}
+.job-card .job-req li { margin-bottom: 5px; }
+
+.email-note {
+  background: var(--email-bg);
+  border-left: 4px solid var(--primary-red);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 25px 0;
+  font-size: clamp(0.85rem, 1.6vw, 0.95rem);
+  color: var(--text-gray);
+  font-weight: 400;
+  line-height: 1.8;
+  word-break: break-word;
+}
+.email-note strong { color: var(--primary-red); }
+
+.harvest-box {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 30px);
+  margin: 25px 0;
+  box-shadow: 0 4px 18px var(--shadow);
+  border-left: 5px solid var(--primary-red);
+}
+
+.harvest-box p {
+  font-size: clamp(0.9rem, 1.7vw, 1rem);
+  color: var(--text-gray);
+  font-weight: 400;
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+.harvest-box p:last-child { margin-bottom: 0; }
+
+.contact-box {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 30px);
+  margin: 25px 0;
+  box-shadow: 0 4px 18px var(--shadow);
+  text-align: center;
+}
+
+.contact-box p {
+  font-size: clamp(0.9rem, 1.7vw, 1rem);
+  color: var(--text-gray);
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.qr-img {
+  width: clamp(140px, 50vw, 220px);
+  height: auto;
+  margin: 0 auto 15px;
+  display: block;
+  border-radius: 12px;
+}
+
+.contact-slogan {
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  color: var(--primary-red);
+  letter-spacing: 2px;
+  margin-top: 20px;
+}
+
+/* ==================== 页脚 ==================== */
+.page-footer { text-align: center; padding: 50px 0 30px; font-weight: 400; }
+
+.page-footer .friend-link {
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+  color: var(--text-light-gray);
+  margin-bottom: 8px;
+  padding: 0 10px;
+}
+
+.page-footer .friend-link a {
+  color: var(--text-light-gray);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-light);
+  transition: color 0.2s, border-color 0.2s;
+}
+.page-footer .friend-link a:hover { color: var(--primary-red); border-bottom-color: var(--primary-red); }
+
+.page-footer .made-by {
+  font-size: clamp(0.72rem, 1.4vw, 0.82rem);
+  color: var(--text-light-gray);
+  letter-spacing: 0.5px;
+}
+
+.page-footer .made-by a {
+  color: var(--text-light-gray);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-light);
+  transition: color 0.2s, border-color 0.2s;
+}
+.page-footer .made-by a:hover { color: var(--primary-red); border-bottom-color: var(--primary-red); }
+
+/* ==================== 响应式 ==================== */
+@media (max-width: 820px) {
+  .navbar {
+    padding: 8px 15px;
+    flex-direction: column;
+    gap: 8px;
+    min-height: auto;
+  }
+  .nav-logo { justify-content: center; }
+  .nav-logo span { font-size: 1rem; }
+  .nav-logo img { height: 34px; }
+  .nav-right {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .nav-links { flex-wrap: wrap; justify-content: center; }
+  .nav-links button { padding: 7px 12px; font-size: 0.9rem; }
+  #main-content { padding-top: 130px; }
+
+  .page-section { padding: 35px 18px 0; }
+  .section-title { padding-left: 14px; border-left-width: 5px; }
+}
+
+@media (max-width: 480px) {
+  .enter-buttons { gap: 10px; }
+  .enter-btn { padding: 9px 20px; font-size: 0.9rem; }
+  .bili-landing-btn { padding: 8px 18px; font-size: 0.85rem; }
+  .logo-group img { height: 65px; }
+
+  .nav-links button { padding: 6px 9px; font-size: 0.82rem; }
+  .toggle-btn { width: 38px; height: 34px; font-size: 0.9rem; }
+  #main-content { padding-top: 120px; }
+
+  .page-section { padding: 25px 14px 0; }
+  .section-title { font-size: 1.3rem; padding-left: 12px; border-left-width: 4px; }
+  .sub-title { font-size: 1rem; }
+  .stat-card { padding: 20px 14px; }
+  .image-card img { height: 160px; }
+  .work-block, .harvest-box, .contact-box, .job-card { padding: 18px 14px; }
+  .bili-btn { padding: 9px 20px; font-size: 0.85rem; }
+}
+
+@media (max-width: 360px) {
+  #landing-page h1 { font-size: 1.7rem; letter-spacing: 2px; }
+  #landing-page .subtitle { font-size: 0.9rem; }
+  #landing-page .slogan { font-size: 0.9rem; }
+  .enter-btn { padding: 8px 16px; font-size: 0.82rem; }
+  .bili-landing-btn { padding: 7px 14px; font-size: 0.78rem; }
+  .nav-links button { padding: 5px 7px; font-size: 0.75rem; }
+  .toggle-btn { width: 34px; height: 30px; font-size: 0.8rem; }
+}
+
+@media (min-width: 1400px) {
+  .page-section { max-width: 1200px; }
+}
+</style>
 </head>
 <body>
 
-  <h1>Heep Woh TV</h1>
-  <h2>广州协和学校电视台</h2>
+<!-- ==================== 首屏 ==================== -->
+<div id="landing-page">
+  <div class="landing-content">
+    <div class="logo-group">
+      <img src="tv-logo.png" alt="协和电视台 Logo">
+    </div>
+    <h1 data-zh="协和电视台" data-en="Heep Woh TV">协和电视台</h1>
+    <p class="subtitle">Heep Woh TV</p>
+    <p class="slogan" data-zh="记录校园点滴 传播青春声音" data-en="Recording Campus Moments, Spreading Youth Voices">记录校园点滴 传播青春声音</p>
 
-  <a href="https://space.bilibili.com/3546824642136779" target="_blank" rel="noopener">
-    访问我们的 Bilibili 主页 →
-  </a>
+    <div class="enter-buttons">
+      <button class="enter-btn" onclick="switchPage('about')" data-zh="社团概况" data-en="About Us">社团概况</button>
+      <button class="enter-btn" onclick="switchPage('works')" data-zh="学生作品" data-en="Our Works">学生作品</button>
+      <button class="enter-btn" onclick="switchPage('join')" data-zh="加入我们" data-en="Join Us">加入我们</button>
+    </div>
+
+    <a class="bili-landing-btn" href="https://space.bilibili.com/3546824642136779" target="_blank" rel="noopener">
+      <span class="bili-icon">📺</span>
+      <span data-zh="关注我们的 B 站" data-en="Follow us on Bilibili">关注我们的 B 站</span>
+    </a>
+
+    <div class="landing-bottom">
+      <p class="landing-years">2009 —— <span data-zh="至今" data-en="Present">至今</span></p>
+      <p class="landing-friend-link" data-zh-html='友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a>' data-en-html='Friend Link: <a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">Guangzhou Xiehe School</a>'>友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a></p>
+      <p class="landing-made-by">Made by <a href="https://github.com/Rick666ya" target="_blank" rel="noopener">Rick666ya</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 主内容区 ==================== -->
+<div id="main-content">
+
+  <nav class="navbar">
+    <div class="nav-logo" onclick="goHome()">
+      <img src="school-logo.png" alt="广州协和学校校徽">
+      <span data-zh="协和电视台" data-en="Heep Woh TV">协和电视台</span>
+    </div>
+
+    <div class="nav-right">
+      <div class="nav-links">
+        <button onclick="switchPage('about')" id="btn-about" data-zh="社团概况" data-en="About Us">社团概况</button>
+        <button onclick="switchPage('works')" id="btn-works" data-zh="学生作品" data-en="Our Works">学生作品</button>
+        <button onclick="switchPage('join')" id="btn-join" data-zh="加入我们" data-en="Join Us">加入我们</button>
+        <button onclick="goHome()" class="home-btn" data-zh="首页" data-en="Home">首页</button>
+      </div>
+      <button class="toggle-btn" id="lang-btn" onclick="toggleLang()" title="Switch language">EN</button>
+      <button class="toggle-btn" id="dark-btn" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ============ 社团概况 ============ -->
+  <div id="about" class="page-section active">
+    <h2 class="section-title" data-zh="社团概况" data-en="About Us">社团概况</h2>
+
+    <p class="section-desc" data-zh-html='协和电视台成立于 <strong>2009 年</strong>，十七年来我们秉持 <strong>“记录校园点滴，传播青春声音”</strong> 的宗旨，作为学校文化传播的重要窗口，始终致力于报道校园新闻、记录大型活动。学校高度重视电视台的发展，为其提供较多资源与支持，希望其能成为展现学校风采、传播优秀文化的重要平台。' data-en-html='Heep Woh TV was founded in <strong>2009</strong>. For seventeen years, we have upheld the mission of <strong>"Recording Campus Moments, Spreading Youth Voices"</strong>. As an important window for school culture, we are dedicated to reporting campus news and documenting major events. The school attaches great importance to the TV station and provides substantial resources and support, hoping it will become an important platform to showcase the school and spread excellent culture.'>协和电视台成立于 <strong>2009 年</strong>，十七年来我们秉持 <strong>“记录校园点滴，传播青春声音”</strong> 的宗旨，作为学校文化传播的重要窗口，始终致力于报道校园新闻、记录大型活动。学校高度重视电视台的发展，为其提供较多资源与支持，希望其能成为展现学校风采、传播优秀文化的重要平台。</p>
+
+    <div class="platform-row">
+      <a class="platform-item" href="https://space.bilibili.com/3546824642136779" target="_blank" rel="noopener">
+        <span class="platform-icon">📺</span>
+        <span class="platform-info">
+          <span class="p-name">Bilibili</span>
+          <span class="p-account" data-zh="广州协和学校TV" data-en="Guangzhou Xiehe School TV">广州协和学校TV</span>
+        </span>
+      </a>
+      <div class="platform-item no-link">
+        <span class="platform-icon">💬</span>
+        <span class="platform-info">
+          <span class="p-name" data-zh="微信视频号" data-en="WeChat Channels">微信视频号</span>
+          <span class="p-account" data-zh="广州协和学校" data-en="Guangzhou Xiehe School">广州协和学校</span>
+        </span>
+      </div>
+    </div>
+
+    <h3 class="sub-title" data-zh="成就" data-en="Achievements">成就</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3><span id="counter-473">0.0</span><span id="counter-unit" data-zh=" 万" data-en="K"> 万</span></h3>
+        <p data-zh="2025 学年单期视频最高播放量" data-en="Highest single-episode views in the 2025 academic year">2025 学年单期视频最高播放量</p>
+      </div>
+      <div class="stat-card">
+        <h3 data-zh="典型融媒体中心" data-en="Typical Media Center">典型融媒体中心</h3>
+        <p data-zh="2024 年校园影视教育成果展称号" data-en="2024 Campus Film & TV Education Achievement Exhibition Award">2024 年校园影视教育成果展称号</p>
+        <a class="stat-link" href="http://www.csmov.com.cn/index.php?c=show&id=4854" target="_blank" rel="noopener" data-zh="查看详情 →" data-en="View Details →">查看详情 →</a>
+      </div>
+      <div class="stat-card">
+        <h3 data-zh="特别展演奖" data-en="Special Performance Award">特别展演奖</h3>
+        <p data-zh="原创作品《光》获广州市校服展演活动" data-en='Original work "Light" won the Special Performance Award at the Guangzhou School Uniform Show'>原创作品《光》获广州市校服展演活动</p>
+      </div>
+      <div class="stat-card">
+        <h3 data-zh="二等奖" data-en="Second Prize">二等奖</h3>
+        <p data-zh="MV《我爱你中国》获广州市教育局“我和我的祖国”短视频大赛" data-en='MV "I Love You China" won second prize in the Guangzhou Education Bureau short video competition'>MV《我爱你中国》获广州市教育局“我和我的祖国”短视频大赛</p>
+      </div>
+    </div>
+
+    <h3 class="sub-title" data-zh="工作日常" data-en="Daily Work">工作日常</h3>
+    <div class="image-grid">
+      <div class="image-card">
+        <img src="workspace1.jpg" alt="《协和新闻》拍摄现场">
+        <p data-zh="《协和新闻》拍摄现场" data-en='"Xiehe News" Filming Set'>《协和新闻》拍摄现场</p>
+      </div>
+      <div class="image-card">
+        <img src="workspace2.jpg" alt="剪辑工程与审片">
+        <p data-zh="《协和新闻》剪辑与审片" data-en='"Xiehe News" Editing & Review'>《协和新闻》剪辑与审片</p>
+      </div>
+      <div class="image-card">
+        <img src="interview.jpg" alt="校园采访现场">
+        <p data-zh="模拟招聘采访现场" data-en="Mock Recruitment Interview">模拟招聘采访现场</p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <p class="friend-link" data-zh-html='友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a>' data-en-html='Friend Link: <a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">Guangzhou Xiehe School</a>'>友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a></p>
+      <p class="made-by">Made by <a href="https://github.com/Rick666ya" target="_blank" rel="noopener">Rick666ya</a></p>
+    </div>
+  </div>
+
+  <!-- ============ 学生作品 ============ -->
+  <div id="works" class="page-section">
+    <h2 class="section-title" data-zh="学生作品" data-en="Our Works">学生作品</h2>
+
+    <div class="work-block">
+      <h3 class="work-title" data-zh="《协和新闻》系列节目" data-en='"Xiehe News" Series'>《协和新闻》系列节目</h3>
+      <p class="work-desc" data-zh="以报道协和近期大事件为主要内容的月更节目。" data-en="A monthly program covering recent major events at Xiehe.">以报道协和近期大事件为主要内容的月更节目。</p>
+      <div class="video-container">
+        <iframe
+          src="https://player.bilibili.com/player.html?isOutside=true&aid=115499606217816&bvid=BV1zU18BcEB7&cid=33738786797&p=1&autoplay=0&no_related=1"
+          scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="work-block">
+      <h3 class="work-title" data-zh="《协和小广场》系列节目" data-en='"Xiehe Little Square" Series'>《协和小广场》系列节目</h3>
+      <p class="work-desc" data-zh="以每周五小广场节目为主要内容的周更节目。" data-en="A weekly program featuring performances at the Little Square every Friday.">以每周五小广场节目为主要内容的周更节目。</p>
+      <a class="bili-btn" href="https://space.bilibili.com/3546824642136779/lists/4544525?type=series" target="_blank" rel="noopener" data-zh="在 B站 查看合集 →" data-en="View Collection on Bilibili →">在 B站 查看合集 →</a>
+    </div>
+
+    <div class="work-block">
+      <h3 class="work-title" data-zh="特别节目" data-en="Special Programs">特别节目</h3>
+      <p class="work-desc" data-zh="除了常规栏目，还有针对各种大型活动的特别节目等。" data-en="Besides regular programs, we also produce special programs for various large-scale events.">除了常规栏目，还有针对各种大型活动的特别节目等。</p>
+      <a class="bili-btn" href="https://space.bilibili.com/3546824642136779/lists/4555088?type=series" target="_blank" rel="noopener" data-zh="在 B站 查看合集 →" data-en="View Collection on Bilibili →">在 B站 查看合集 →</a>
+    </div>
+
+    <div class="page-footer">
+      <p class="friend-link" data-zh-html='友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a>' data-en-html='Friend Link: <a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">Guangzhou Xiehe School</a>'>友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a></p>
+      <p class="made-by">Made by <a href="https://github.com/Rick666ya" target="_blank" rel="noopener">Rick666ya</a></p>
+    </div>
+  </div>
+
+  <!-- ============ 加入我们 ============ -->
+  <div id="join" class="page-section">
+    <h2 class="section-title" data-zh="加入我们" data-en="Join Us">加入我们</h2>
+
+    <h3 class="sub-title" data-zh="开放岗位" data-en="Open Positions">开放岗位</h3>
+    <div class="job-grid">
+
+      <div class="job-card">
+        <h4 data-zh="📷 摄影" data-en="📷 Photography">📷 摄影</h4>
+        <p class="job-duty" data-zh="你需要使用自有或学校设备，在电视台的项目中做好摄影、DIT 的工作。" data-en="You will use your own or school equipment to handle photography and DIT work in TV station projects.">你需要使用自有或学校设备，在电视台的项目中做好摄影、DIT 的工作。</p>
+        <ul class="job-req">
+          <li data-zh="热爱传媒事业，能吃苦耐劳；" data-en="Passionate about media, hardworking and resilient;">热爱传媒事业，能吃苦耐劳；</li>
+          <li data-zh="有作品集的优先。" data-en="Portfolio preferred.">有作品集的优先。</li>
+        </ul>
+      </div>
+
+      <div class="job-card">
+        <h4 data-zh="🎙 记者 / 主持人" data-en="🎙 Reporter / Host">🎙 记者 / 主持人</h4>
+        <p class="job-duty" data-zh="你需要在电视台的户外项目中配合摄影一起外采，并配合摄影一起做好全流程的工作；或是担任《协和新闻》的主播。" data-en='You will work with photographers on outdoor reporting projects and support the full workflow, or serve as the anchor for "Xiehe News".'>你需要在电视台的户外项目中配合摄影一起外采，并配合摄影一起做好全流程的工作；或是担任《协和新闻》的主播。</p>
+        <ul class="job-req">
+          <li data-zh="热爱传媒事业，能吃苦耐劳；" data-en="Passionate about media, hardworking and resilient;">热爱传媒事业，能吃苦耐劳；</li>
+          <li data-zh="有提出采访问题的能力。" data-en="Ability to propose interview questions.">有提出采访问题的能力。</li>
+        </ul>
+      </div>
+
+      <div class="job-card">
+        <h4 data-zh="🖥 剪辑" data-en="🖥 Editing">🖥 剪辑</h4>
+        <p class="job-duty" data-zh="你需要处理所有电视台节目的输出工作，并做好后续的运营工作。" data-en="You will handle the output of all TV station programs and manage follow-up operations.">你需要处理所有电视台节目的输出工作，并做好后续的运营工作。</p>
+        <ul class="job-req">
+          <li data-zh="热爱传媒事业，能吃苦耐劳；" data-en="Passionate about media, hardworking and resilient;">热爱传媒事业，能吃苦耐劳；</li>
+          <li data-zh="熟悉 DaVinci Resolve、Final Cut Pro 或 Adobe Premiere Pro 的优先；" data-en="Familiar with DaVinci Resolve, Final Cut Pro, or Adobe Premiere Pro preferred;">熟悉 DaVinci Resolve、Final Cut Pro 或 Adobe Premiere Pro 的优先；</li>
+          <li data-zh="有作品集的优先。" data-en="Portfolio preferred.">有作品集的优先。</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="email-note" data-zh-html='作品集可投稿至 <strong>hy_666ya@126.com</strong>，标题备注 <strong>“电视台招新 + 岗位 + 姓名”</strong>。' data-en-html='Submit your portfolio to <strong>hy_666ya@126.com</strong> with the subject <strong>"TV Station Recruitment + Position + Name"</strong>.'>作品集可投稿至 <strong>hy_666ya@126.com</strong>，标题备注 <strong>“电视台招新 + 岗位 + 姓名”</strong>。</div>
+
+    <h3 class="sub-title" data-zh="你能收获什么" data-en="What You'll Gain">你能收获什么</h3>
+    <div class="harvest-box">
+      <p data-zh="我们不会辜负每一位成员的付出，协和电视台将根据每位成员具体工作情况发放志愿时，以记录为协和电视台的奉献时长。" data-en="We will not let down any member's contribution. Heep Woh TV will issue volunteer service hours based on each member's actual work, recording your dedication to the station.">我们不会辜负每一位成员的付出，协和电视台将根据每位成员具体工作情况发放志愿时，以记录为协和电视台的奉献时长。</p>
+      <p data-zh="在不同的项目中收获能力与经验，更收获友谊与快乐，与志同道合的伙伴们一起，书写协和印记。" data-en="Gain skills and experience through various projects, and also gain friendship and joy. Together with like-minded partners, write your own Xiehe story.">在不同的项目中收获能力与经验，更收获友谊与快乐，与志同道合的伙伴们一起，书写协和印记。</p>
+    </div>
+
+    <h3 class="sub-title" data-zh="咨询及预报名渠道" data-en="Consultation & Pre-registration">咨询及预报名渠道</h3>
+    <div class="contact-box">
+      <p data-zh="欢迎加入协和电视台 QQ 咨询群，有任何想问的都可以问噢~" data-en="Welcome to join the Heep Woh TV QQ consultation group. Feel free to ask anything~">欢迎加入协和电视台 QQ 咨询群，有任何想问的都可以问噢~</p>
+      <img class="qr-img" src="qq-qr.png" alt="协和电视台 QQ 咨询群二维码">
+      <p class="contact-slogan" data-zh="镜头内外，世界由你定义" data-en="Inside and outside the lens, the world is defined by you">镜头内外，世界由你定义</p>
+    </div>
+
+    <div class="page-footer">
+      <p class="friend-link" data-zh-html='友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a>' data-en-html='Friend Link: <a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">Guangzhou Xiehe School</a>'>友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a></p>
+      <p class="made-by">Made by <a href="https://github.com/Rick666ya" target="_blank" rel="noopener">Rick666ya</a></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let counterAnimId = null;
+let currentLang = 'zh';
+
+function switchPage(pageId) {
+  document.getElementById('landing-page').classList.add('hidden');
+  document.getElementById('main-content').style.display = 'block';
+
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(pageId);
+  if (target) target.classList.add('active');
+
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('btn-' + pageId);
+  if (btn) btn.classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (pageId === 'about') {
+    const counterEl = document.getElementById('counter-473');
+    if (counterEl) {
+      counterEl.textContent = currentLang === 'en' ? '0' : '0.0';
+    }
+    setTimeout(animateCounter, 400);
+  }
+}
+
+function goHome() {
+  document.getElementById('main-content').style.display = 'none';
+  document.getElementById('landing-page').classList.remove('hidden');
+  window.scrollTo({ top: 0 });
+}
+
+function animateCounter() {
+  const el = document.getElementById('counter-473');
+  if (!el) return;
+
+  if (counterAnimId) {
+    cancelAnimationFrame(counterAnimId);
+    counterAnimId = null;
+  }
+
+  const isEn = currentLang === 'en';
+  const target = isEn ? 473 : 47.3;
+  const decimals = isEn ? 0 : 1;
+  const duration = 1600;
+  const startTime = performance.now();
+
+  el.textContent = isEn ? '0' : '0.0';
+
+  function update(now) {
+    const elapsed = now - startTime;
+    let progress = Math.min(elapsed / duration, 1);
+    progress = 1 - Math.pow(1 - progress, 3);
+    el.textContent = (target * progress).toFixed(decimals);
+    if (progress < 1) {
+      counterAnimId = requestAnimationFrame(update);
+    } else {
+      el.textContent = isEn ? '473' : '47.3';
+      counterAnimId = null;
+    }
+  }
+  counterAnimId = requestAnimationFrame(update);
+}
+
+function toggleDark() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  document.getElementById('dark-btn').textContent = isDark ? '☀️' : '🌙';
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  document.getElementById('lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
+  document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+
+  document.querySelectorAll('[data-zh]').forEach(el => {
+    el.textContent = currentLang === 'zh' ? el.dataset.zh : el.dataset.en;
+  });
+
+  document.querySelectorAll('[data-zh-html]').forEach(el => {
+    el.innerHTML = currentLang === 'zh' ? el.dataset.zhHtml : el.dataset.enHtml;
+  });
+
+  if (counterAnimId) {
+    cancelAnimationFrame(counterAnimId);
+    counterAnimId = null;
+  }
+  const counterEl = document.getElementById('counter-473');
+  if (counterEl) {
+    counterEl.textContent = currentLang === 'en' ? '473' : '47.3';
+  }
+}
+</script>
 
 </body>
 </html>

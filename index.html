@@ -93,14 +93,13 @@ img { max-width: 100%; height: auto; display: block; }
   width: 100%; height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background: radial-gradient(circle at center, #c81b21 0%, #7a0d12 100%);
   color: #ffffff;
   z-index: 999;
   transition: opacity 0.5s ease, visibility 0.5s;
   text-align: center;
-  padding: 20px;
+  padding: clamp(30px, 6vh, 60px) 20px clamp(24px, 4vh, 40px);
   overflow-y: auto;
 }
 
@@ -110,44 +109,42 @@ img { max-width: 100%; height: auto; display: block; }
   pointer-events: none;
 }
 
-.landing-content {
+/* 中间主内容：撑满剩余空间并垂直居中 */
+.landing-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 800px;
+  justify-content: center;
+  gap: clamp(18px, 3vh, 28px);
   width: 100%;
-  padding: 20px 0;
+  max-width: 800px;
+  align-self: center;
+  padding-bottom: clamp(16px, 3vh, 32px);
 }
 
-/* Logo：去掉发光，白色圆角容器保证在红色背景上清晰可读 */
+/* Logo：无白底，无发光，直接显示 */
 .logo-group {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
-  background: #ffffff;
-  padding: clamp(14px, 2.5vw, 22px);
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
 .logo-group img {
-  height: clamp(80px, 14vw, 130px);
+  height: clamp(90px, 15vw, 150px);
   width: auto;
   display: block;
 }
 
-#landing-page .subtitle {
+.landing-main .subtitle {
   font-size: clamp(1.1rem, 2.8vw, 1.6rem);
   opacity: 0.95;
-  margin-bottom: clamp(28px, 5vw, 45px);
   font-weight: 400;
   letter-spacing: 3px;
 }
 
-#landing-page .slogan {
+.landing-main .slogan {
   font-size: clamp(1rem, 2.8vw, 1.5rem);
   opacity: 0.95;
-  margin-bottom: clamp(28px, 5vw, 45px);
   letter-spacing: clamp(1px, 0.5vw, 3px);
   padding: 0 10px;
 }
@@ -157,8 +154,8 @@ img { max-width: 100%; height: auto; display: block; }
   flex-wrap: wrap;
   justify-content: center;
   gap: clamp(10px, 2vw, 18px);
-  margin-bottom: 22px;
   width: 100%;
+  margin-top: 6px;
 }
 
 .enter-btn {
@@ -195,8 +192,8 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: clamp(0.88rem, 1.8vw, 1rem);
   text-decoration: none;
   transition: all 0.3s;
-  margin-bottom: clamp(28px, 5vw, 45px);
   text-align: center;
+  margin-top: 6px;
 }
 
 .bili-landing-btn:hover {
@@ -207,20 +204,25 @@ img { max-width: 100%; height: auto; display: block; }
 
 .bili-landing-btn .bili-icon { font-size: 1.2rem; }
 
-.landing-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 0 15px;
-}
-
+/* 年份：独立一层，位于中间内容和底部信息之间 */
 .landing-years {
   font-size: clamp(0.8rem, 1.6vw, 0.95rem);
   opacity: 0.7;
   letter-spacing: 3px;
   font-weight: 400;
+  margin-bottom: clamp(16px, 3vh, 28px);
+  flex-shrink: 0;
+}
+
+/* 底部信息：贴底 */
+.landing-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0 15px;
+  flex-shrink: 0;
 }
 
 .landing-friend-link {
@@ -717,8 +719,7 @@ a.platform-item:hover::after { opacity: 1; }
   .enter-buttons { gap: 10px; }
   .enter-btn { padding: 9px 20px; font-size: 0.9rem; }
   .bili-landing-btn { padding: 8px 18px; font-size: 0.85rem; }
-  .logo-group { padding: 12px; border-radius: 18px; }
-  .logo-group img { height: 70px; }
+  .logo-group img { height: 80px; }
 
   .nav-links button { padding: 6px 9px; font-size: 0.82rem; }
   .toggle-btn { width: 38px; height: 34px; font-size: 0.9rem; }
@@ -734,12 +735,11 @@ a.platform-item:hover::after { opacity: 1; }
 }
 
 @media (max-width: 360px) {
-  #landing-page .subtitle { font-size: 0.95rem; }
-  #landing-page .slogan { font-size: 0.9rem; }
+  .landing-main .subtitle { font-size: 0.95rem; }
+  .landing-main .slogan { font-size: 0.9rem; }
   .enter-btn { padding: 8px 16px; font-size: 0.82rem; }
   .bili-landing-btn { padding: 7px 14px; font-size: 0.78rem; }
-  .logo-group { padding: 10px; border-radius: 16px; }
-  .logo-group img { height: 60px; }
+  .logo-group img { height: 70px; }
   .nav-links button { padding: 5px 7px; font-size: 0.75rem; }
   .toggle-btn { width: 34px; height: 30px; font-size: 0.8rem; }
 }
@@ -753,7 +753,9 @@ a.platform-item:hover::after { opacity: 1; }
 
 <!-- ==================== 首屏 ==================== -->
 <div id="landing-page">
-  <div class="landing-content">
+
+  <!-- 中间主内容：居中 -->
+  <div class="landing-main">
     <div class="logo-group">
       <img src="tv-logo.webp" alt="协和电视台 Logo">
     </div>
@@ -770,13 +772,17 @@ a.platform-item:hover::after { opacity: 1; }
       <span class="bili-icon">📺</span>
       <span data-zh="关注我们的 B 站" data-en="Follow us on Bilibili">关注我们的 B 站</span>
     </a>
-
-    <div class="landing-bottom">
-      <p class="landing-years">2009 —— <span data-zh="至今" data-en="Present">至今</span></p>
-      <p class="landing-friend-link" data-zh-html='友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a>' data-en-html='Friend Link: <a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">Guangzhou Xiehe School</a>'>友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a></p>
-      <p class="landing-made-by">Made by <a href="https://github.com/Rick666ya" target="_blank" rel="noopener">Rick666ya</a></p>
-    </div>
   </div>
+
+  <!-- 年份：独立一层，紧跟在中间内容下面 -->
+  <p class="landing-years">2009 —— <span data-zh="至今" data-en="Present">至今</span></p>
+
+  <!-- 底部信息：贴底 -->
+  <div class="landing-bottom">
+    <p class="landing-friend-link" data-zh-html='友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a>' data-en-html='Friend Link: <a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">Guangzhou Xiehe School</a>'>友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a></p>
+    <p class="landing-made-by">Made by <a href="https://github.com/Rick666ya" target="_blank" rel="noopener">Rick666ya</a></p>
+  </div>
+
 </div>
 
 <!-- ==================== 主内容区 ==================== -->

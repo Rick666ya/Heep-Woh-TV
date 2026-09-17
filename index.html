@@ -119,27 +119,29 @@ img { max-width: 100%; height: auto; display: block; }
   padding: 20px 0;
 }
 
-.logo-group { display: flex; justify-content: center; margin-bottom: 30px; }
-.logo-group img {
-  height: clamp(70px, 12vw, 110px);
-  width: auto;
-  filter: drop-shadow(0 0 12px rgba(255,255,255,0.4));
+/* Logo：去掉发光，白色圆角容器保证在红色背景上清晰可读 */
+.logo-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  background: #ffffff;
+  padding: clamp(14px, 2.5vw, 22px);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
-
-#landing-page h1 {
-  font-size: clamp(2rem, 7vw, 3.8rem);
-  letter-spacing: clamp(2px, 1vw, 6px);
-  margin-bottom: 15px;
-  text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
-  line-height: 1.2;
+.logo-group img {
+  height: clamp(80px, 14vw, 130px);
+  width: auto;
+  display: block;
 }
 
 #landing-page .subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.4rem);
-  opacity: 0.9;
+  font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+  opacity: 0.95;
   margin-bottom: clamp(28px, 5vw, 45px);
   font-weight: 400;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 #landing-page .slogan {
@@ -644,6 +646,8 @@ a.platform-item:hover::after { opacity: 1; }
   margin: 0 auto 15px;
   display: block;
   border-radius: 12px;
+  background: #ffffff;
+  padding: 8px;
 }
 
 .contact-slogan {
@@ -713,7 +717,8 @@ a.platform-item:hover::after { opacity: 1; }
   .enter-buttons { gap: 10px; }
   .enter-btn { padding: 9px 20px; font-size: 0.9rem; }
   .bili-landing-btn { padding: 8px 18px; font-size: 0.85rem; }
-  .logo-group img { height: 65px; }
+  .logo-group { padding: 12px; border-radius: 18px; }
+  .logo-group img { height: 70px; }
 
   .nav-links button { padding: 6px 9px; font-size: 0.82rem; }
   .toggle-btn { width: 38px; height: 34px; font-size: 0.9rem; }
@@ -729,11 +734,12 @@ a.platform-item:hover::after { opacity: 1; }
 }
 
 @media (max-width: 360px) {
-  #landing-page h1 { font-size: 1.7rem; letter-spacing: 2px; }
-  #landing-page .subtitle { font-size: 0.9rem; }
+  #landing-page .subtitle { font-size: 0.95rem; }
   #landing-page .slogan { font-size: 0.9rem; }
   .enter-btn { padding: 8px 16px; font-size: 0.82rem; }
   .bili-landing-btn { padding: 7px 14px; font-size: 0.78rem; }
+  .logo-group { padding: 10px; border-radius: 16px; }
+  .logo-group img { height: 60px; }
   .nav-links button { padding: 5px 7px; font-size: 0.75rem; }
   .toggle-btn { width: 34px; height: 30px; font-size: 0.8rem; }
 }
@@ -749,9 +755,8 @@ a.platform-item:hover::after { opacity: 1; }
 <div id="landing-page">
   <div class="landing-content">
     <div class="logo-group">
-      <img src="tv-logo.png" alt="协和电视台 Logo">
+      <img src="tv-logo.webp" alt="协和电视台 Logo">
     </div>
-    <h1 data-zh="协和电视台" data-en="Heep Woh TV">协和电视台</h1>
     <p class="subtitle">Heep Woh TV</p>
     <p class="slogan" data-zh="记录校园点滴 传播青春声音" data-en="Recording Campus Moments, Spreading Youth Voices">记录校园点滴 传播青春声音</p>
 
@@ -779,7 +784,7 @@ a.platform-item:hover::after { opacity: 1; }
 
   <nav class="navbar">
     <div class="nav-logo" onclick="goHome()">
-      <img src="school-logo.png" alt="广州协和学校校徽">
+      <img src="school-logo.webp" alt="广州协和学校校徽">
       <span data-zh="协和电视台" data-en="Heep Woh TV">协和电视台</span>
     </div>
 
@@ -842,15 +847,15 @@ a.platform-item:hover::after { opacity: 1; }
     <h3 class="sub-title" data-zh="工作日常" data-en="Daily Work">工作日常</h3>
     <div class="image-grid">
       <div class="image-card">
-        <img src="workspace1.jpg" alt="《协和新闻》拍摄现场">
+        <img src="workspace1.webp" alt="《协和新闻》拍摄现场">
         <p data-zh="《协和新闻》拍摄现场" data-en='"Xiehe News" Filming Set'>《协和新闻》拍摄现场</p>
       </div>
       <div class="image-card">
-        <img src="workspace2.jpg" alt="剪辑工程与审片">
+        <img src="workspace2.webp" alt="剪辑工程与审片">
         <p data-zh="《协和新闻》剪辑与审片" data-en='"Xiehe News" Editing & Review'>《协和新闻》剪辑与审片</p>
       </div>
       <div class="image-card">
-        <img src="interview.jpg" alt="校园采访现场">
+        <img src="interview.webp" alt="校园采访现场">
         <p data-zh="模拟招聘采访现场" data-en="Mock Recruitment Interview">模拟招聘采访现场</p>
       </div>
     </div>
@@ -942,7 +947,7 @@ a.platform-item:hover::after { opacity: 1; }
     <h3 class="sub-title" data-zh="咨询及预报名渠道" data-en="Consultation & Pre-registration">咨询及预报名渠道</h3>
     <div class="contact-box">
       <p data-zh="欢迎加入协和电视台 QQ 咨询群，有任何想问的都可以问噢~" data-en="Welcome to join the Heep Woh TV QQ consultation group. Feel free to ask anything~">欢迎加入协和电视台 QQ 咨询群，有任何想问的都可以问噢~</p>
-      <img class="qr-img" src="qq-qr.png" alt="协和电视台 QQ 咨询群二维码">
+      <img class="qr-img" src="qq-qr.webp" alt="协和电视台 QQ 咨询群二维码">
       <p class="contact-slogan" data-zh="镜头内外，世界由你定义" data-en="Inside and outside the lens, the world is defined by you">镜头内外，世界由你定义</p>
     </div>
 

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>协和电视台 | Heep Woh TV</title>
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
 @font-face {
@@ -109,7 +110,6 @@ img { max-width: 100%; height: auto; display: block; }
   pointer-events: none;
 }
 
-/* 中间主内容：撑满剩余空间并垂直居中 */
 .landing-main {
   flex: 1;
   display: flex;
@@ -123,7 +123,6 @@ img { max-width: 100%; height: auto; display: block; }
   padding-bottom: clamp(16px, 3vh, 32px);
 }
 
-/* Logo：无白底，无发光，直接显示 */
 .logo-group {
   display: flex;
   justify-content: center;
@@ -204,7 +203,6 @@ img { max-width: 100%; height: auto; display: block; }
 
 .bili-landing-btn .bili-icon { font-size: 1.2rem; }
 
-/* 年份：独立一层，位于中间内容和底部信息之间 */
 .landing-years {
   font-size: clamp(0.8rem, 1.6vw, 0.95rem);
   opacity: 0.7;
@@ -214,7 +212,6 @@ img { max-width: 100%; height: auto; display: block; }
   flex-shrink: 0;
 }
 
-/* 底部信息：贴底 */
 .landing-bottom {
   display: flex;
   flex-direction: column;
@@ -754,7 +751,6 @@ a.platform-item:hover::after { opacity: 1; }
 <!-- ==================== 首屏 ==================== -->
 <div id="landing-page">
 
-  <!-- 中间主内容：居中 -->
   <div class="landing-main">
     <div class="logo-group">
       <img src="tv-logo.webp" alt="协和电视台 Logo">
@@ -774,10 +770,8 @@ a.platform-item:hover::after { opacity: 1; }
     </a>
   </div>
 
-  <!-- 年份：独立一层，紧跟在中间内容下面 -->
   <p class="landing-years">2009 —— <span data-zh="至今" data-en="Present">至今</span></p>
 
-  <!-- 底部信息：贴底 -->
   <div class="landing-bottom">
     <p class="landing-friend-link" data-zh-html='友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a>' data-en-html='Friend Link: <a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">Guangzhou Xiehe School</a>'>友情链接：<a href="https://www.gzxhhs.edu.cn/" target="_blank" rel="noopener">广州协和学校</a></p>
     <p class="landing-made-by">Made by <a href="https://github.com/Rick666ya" target="_blank" rel="noopener">Rick666ya</a></p>
